@@ -1,34 +1,49 @@
-import { createPinia } from 'pinia'; 
-import { watch } from 'vue'; 
-import { bookSeeder } from '@/stores/bookseeder.js'; 
+import { createPinia, type Pinia } from 'pinia';
+import { watch } from 'vue';
+import { bookSeeder } from '@/stores/bookseeder.js';
+import { reviewSeeder } from '@/stores/reviewseeder.js';
 
-export default class PiniaConfig { 
-  public static init() { 
-    const pinia = createPinia(); 
-    const savedState = localStorage.getItem('piniaState'); 
-    if (savedState) { 
-      pinia.state.value = JSON.parse(savedState); 
-    } else { 
-      // initialize the state with the seeders 
-      pinia.state.value = { 
-        book: { 
-          books: bookSeeder, 
-        }, 
-      }; 
+export class PiniaConfig {
+  public static init(): Pinia {
+    const pinia = createPinia();
+    const savedState = localStorage.getItem('piniaState');
 
-      // save the initial state to localStorage 
-      localStorage.setItem('piniaState', JSON.stringify(pinia.state.value)); 
-    } 
+    if (savedState) {
+      try {
+        pinia.state.value = JSON.parse(savedState);
+      } catch {
+        localStorage.removeItem('piniaState');
+      }
+    }
 
-    // watch for changes and save to localStorage 
-    watch( 
-      pinia.state, 
-      (state) => { 
-        localStorage.setItem('piniaState', JSON.stringify(state)); 
-      }, 
-      { deep: true }, 
-    ); 
+    if (!localStorage.getItem('piniaState')) {
+      // initialize the state with the seeders
+      pinia.state.value = {
+        book: {
+          books: bookSeeder,
+        },
+        review: {
+          reviews: reviewSeeder,
+        },
+      };
 
-    return pinia; 
-  } 
-} 
+      // save the initial state to localStorage
+      localStorage.setItem('piniaState', JSON.stringify(pinia.state.value));
+    }
+
+    // watch for changes and save to localStorage
+    watch(
+      pinia.state,
+      (state) => {
+        localStorage.setItem('piniaState', JSON.stringify(state));
+      },
+      { deep: true },
+    );
+
+    return pinia;
+  }
+}
+
+export default PiniaConfig;
+
+ 
