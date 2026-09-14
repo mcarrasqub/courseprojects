@@ -14,9 +14,7 @@ export class ReviewService {
   static createReview(review: CreateReviewDTO): void {
     const store = useReviewStore();
     const nextId =
-      store.reviews.length > 0
-        ? Math.max(...store.reviews.map((r) => r.id), 0) + 1
-        : 1;
+      store.reviews.length > 0 ? Math.max(...store.reviews.map((r) => r.id), 0) + 1 : 1;
 
     store.reviews.push({
       id: nextId,
@@ -25,4 +23,3 @@ export class ReviewService {
     });
   }
 }
-

@@ -14,7 +14,6 @@ function formatPrice(price: number): string {
 }
 </script>
 
-
 <template>
   <section v-if="book">
     <div class="max-w-7xl mx-auto">
@@ -90,4 +89,3 @@ function formatPrice(price: number): string {
     </RouterLink>
   </section>
 </template>
- 

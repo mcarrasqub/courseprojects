@@ -19,7 +19,6 @@ function formatPrice(price: number): string {
 }
 </script>
 
-
 <template>
   <section>
     <div class="max-w-7xl mx-auto">
@@ -99,4 +98,4 @@ function formatPrice(price: number): string {
       </div>
     </div>
   </section>
-</template>
+</template>

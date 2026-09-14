@@ -45,5 +45,3 @@ export class PiniaConfig {
 }
 
 export default PiniaConfig;
-
- 

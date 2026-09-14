@@ -43,7 +43,6 @@ function formatDate(iso?: string): string {
 }
 </script>
 
-
 <template>
   <div class="space-y-6">
     <h3 class="text-lg font-semibold text-gray-800">Reviews</h3>
@@ -117,4 +116,4 @@ function formatDate(iso?: string): string {
       </li>
     </ul>
   </div>
-</template>
+</template>

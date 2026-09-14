@@ -22,5 +22,3 @@ export class OtherService {
 }
 
 export default OtherService;
-
- 

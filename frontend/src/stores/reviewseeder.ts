@@ -41,4 +41,4 @@ export const reviewSeeder: ReviewInterface[] = [
     author: 'Carol Reader',
     createdAt: '2026-02-10T16:20:00.000Z',
   },
-];
+];

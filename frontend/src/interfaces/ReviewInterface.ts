@@ -5,4 +5,4 @@ export interface ReviewInterface {
   comment: string;
   author?: string;
   createdAt?: string;
-}
+}
