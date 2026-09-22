@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import BookReviews from '@/components/BookReviews.vue';
 import { BookService } from '@/services/BookService.js';
-import { OtherService } from '@/services/OtherService.js';
-import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import type { BookInterface } from '@/interfaces/BookInterface.js'; 
+import { onMounted, ref } from 'vue'; 
 
-const route = useRoute();
-const bookId = computed(() => Number(route.params.id));
-const book = computed(() => BookService.getBookById(bookId.value));
+const book = ref<BookInterface | null>(null); 
 
-function formatPrice(price: number): string {
-  return OtherService.formatToCOP(price);
-}
+// functions 
+function formatToCOP(price: number): string { 
+  return price ? price.toLocaleString('es-CO') : '0';
+} 
+
+onMounted(async () => { 
+  const route = useRoute(); 
+  const bookId = Number(route.params.id); 
+  book.value = await BookService.getBookById(bookId); 
+}); 
 </script>
 
 <template>
@@ -59,7 +64,7 @@ function formatPrice(price: number): string {
                 </div>
                 <div class="flex justify-between">
                   <span class="text-gray-600">Price:</span>
-                  <span class="font-medium">${{ formatPrice(book.price) }} COP</span>
+                  <span class="font-medium">${{ formatToCOP(book.price) }} COP</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-gray-600">Stock:</span>
